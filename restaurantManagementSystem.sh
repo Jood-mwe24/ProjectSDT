@@ -38,6 +38,7 @@ display_menu() {
            echo "3. Search Recipes"
            ;;
         4) echo "Billing and Invoicing System"
+
            echo "1. Generate Invoice"
            echo "2. View Invoices"
            ;;

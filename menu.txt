@@ -1,1 +1,2 @@
 water - 5
+cookies - 15
