@@ -81,19 +81,24 @@ ingredient_inventory() {
 
 # Function for Recipe Database
 recipe_database() {
+    # Start an infinite loop to display the recipe database menu
     while true; do
+        # Display the recipe database submenu by calling the display_menu function with argument 3
         display_menu 3
+        # Read the user's choice from the input
         read choice
 
+        # Use a case statement to handle different choices
         case $choice in
-            1) add_recipe ;;
-            2) view_recipes ;;
-            3) search_recipes ;;
-            4) break ;;
-            *) echo "Invalid choice. Please enter a valid option." ;;
+            1) add_recipe ;;    # If the user chooses 1, call the add_recipe function to add a new recipe
+            2) view_recipes ;;  # If the user chooses 2, call the view_recipes function to display all recipes
+            3) search_recipes ;; # If the user chooses 3, call the search_recipes function to search for recipes
+            4) break ;;         # If the user chooses 4, break out of the loop and exit the recipe database menu
+            *) echo "Invalid choice. Please enter a valid option." ;;  # Display an error message for invalid choices
         esac
     done
 }
+
 
 # Function for Billing and Invoicing System
 billing_invoicing() {
