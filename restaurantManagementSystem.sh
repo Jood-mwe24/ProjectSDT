@@ -20,8 +20,9 @@ display_main_menu() {
     echo "Enter your choice: "
 }
 
-# Function to display sub-menus
+# Defining Function to display sub-menus to choose from after the user choose which service he wants 
 display_menu() {
+    # Starting a case statement to view details and display menu after chosing the desired service
     case $1 in
         1) echo "Menu Management"
            echo "1. Add Menu Item"
