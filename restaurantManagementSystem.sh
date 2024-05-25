@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Initialize files if not exists
+# Initializing files to store data in 
 menu_file="menu.txt"
 inventory_file="inventory.txt"
 database_file="recipes.txt"
 invoice_file="invoices.txt"
+
 
 touch "$menu_file" "$inventory_file" "$database_file" "$invoice_file"
 
@@ -63,12 +64,19 @@ menu_management() {
     done
 }
 
-# Function for Ingredient Inventory Tracker
+# Defining a function named ingredient inventory
 ingredient_inventory() {
+# Starting an infinite loop with coundition( True )
+# It is created to display the available choices the user can choose from
+# It also handles user inputs
     while true; do
+	#Calling display menu function with option 2 as argument
+	# Its job is to diplay options
         display_menu 2
+	# Reading user input and assigning it to a variable named (choice)
         read choice
 
+	# Starting case statement to handle different choices
         case $choice in
             1) add_ingredient ;;
             2) view_inventory ;;
