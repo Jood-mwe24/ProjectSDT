@@ -83,9 +83,10 @@ ingredient_inventory() {
             3) update_quantity ;;
             4) break ;;
             *) echo "Invalid choice. Please enter a valid option." ;;
-        esac
-    done
+        esac # End of case statement
+    done # End of while loop
 }
+# End of function definition
 
 # Function for Recipe Database
 recipe_database() {
