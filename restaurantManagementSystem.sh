@@ -77,6 +77,9 @@ ingredient_inventory() {
         read choice
 
 	# Starting case statement to handle different choices
+	# In this case statement we have 3 function calls which are the services
+	# The forth option is the exit choise
+	# And for default case it is going to be ann error message for wrong entry
         case $choice in
             1) add_ingredient ;;
             2) view_inventory ;;
