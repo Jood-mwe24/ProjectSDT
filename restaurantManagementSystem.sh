@@ -38,7 +38,6 @@ display_menu() {
            echo "3. Search Recipes"
            ;;
         4) echo "Billing and Invoicing System"
-
            echo "1. Generate Invoice"
            echo "2. View Invoices"
            ;;
@@ -80,6 +79,7 @@ ingredient_inventory() {
 }
 
 # Function for Recipe Database
+# Function for managing the Recipe Database
 recipe_database() {
     # Start an infinite loop to display the recipe database menu
     while true; do
@@ -91,7 +91,7 @@ recipe_database() {
         # Use a case statement to handle different choices
         case $choice in
             1) add_recipe ;;    # If the user chooses 1, call the add_recipe function to add a new recipe
-            2) view_recipes ;;  # If the user chooses 2, call the view_recipes function to display all recipes
+            2) view_recipes ;;  # If the user chooses 2, call the view_recipes function to view all recipes
             3) search_recipes ;; # If the user chooses 3, call the search_recipes function to search for recipes
             4) break ;;         # If the user chooses 4, break out of the loop and exit the recipe database menu
             *) echo "Invalid choice. Please enter a valid option." ;;  # Display an error message for invalid choices
@@ -100,20 +100,25 @@ recipe_database() {
 }
 
 
-# Function for Billing and Invoicing System
+# Function for managing the Billing and Invoicing System
 billing_invoicing() {
+    # Start an infinite loop to display the billing and invoicing menu
     while true; do
+        # Display the billing and invoicing submenu by calling the display_menu function with argument 4
         display_menu 4
+        # Read the user's choice from the input
         read choice
 
+        # Use a case statement to handle different choices
         case $choice in
-            1) generate_invoice ;;
-            2) view_invoices ;;
-            3) break ;;
-            *) echo "Invalid choice. Please enter a valid option." ;;
+            1) generate_invoice ;;  # If the user chooses 1, call the generate_invoice function to generate an invoice
+            2) view_invoices ;;     # If the user chooses 2, call the view_invoices function to view all invoices
+            3) break ;;             # If the user chooses 3, break out of the loop and exit the billing and invoicing menu
+            *) echo "Invalid choice. Please enter a valid option." ;;  # Display an error message for invalid choices
         esac
     done
 }
+
 
 # Function to add menu item
 add_menu_item() {
@@ -169,50 +174,72 @@ update_quantity() {
     echo "Ingredient quantity updated successfully!"
 }
 
-# Function to add recipe
+# Function for adding a new recipe to the recipe database
 add_recipe() {
+    # Prompt the user to enter the name of the recipe
     echo "Enter the name of the recipe: "
     read name
+    # Prompt the user to enter the ingredients for the recipe (comma-separated)
     echo "Enter the ingredients for $name (comma-separated): "
     read ingredients
+    # Prompt the user to enter the instructions for the recipe
     echo "Enter the instructions for $name: "
     read instructions
 
+    # Append the new recipe information to the recipe database file in the format: name|ingredients|instructions
     echo "$name|$ingredients|$instructions" >> "$database_file"
+    # Display a success message indicating that the recipe was added successfully
     echo "Recipe added successfully!"
 }
 
-# Function to view recipes
+
+# Function for viewing recipes stored in the recipe database
 view_recipes() {
+    # Display a header indicating that the following content is a list of recipes
     echo "Recipes:"
+    # Output the contents of the recipe database file using the cat command
     cat "$database_file"
 }
 
-# Function to search recipes
+# Function for searching recipes in the recipe database
 search_recipes() {
+    # Prompt the user to enter a keyword to search for within the recipes
     echo "Enter a keyword to search for: "
+    # Read the keyword input from the user
     read keyword
 
+    # Use the grep command to search for the keyword in the recipe database file, ignoring case sensitivity
     grep -i "$keyword" "$database_file"
 }
 
-# Function to generate invoice
+
+# Function for generating an invoice and adding it to the invoice file
 generate_invoice() {
+    # Prompt the user to enter the customer's name
     echo "Enter customer name: "
+    # Read the customer's name input from the user
     read customer_name
+    # Prompt the user to enter the invoice amount
     echo "Enter amount: "
+    # Read the invoice amount input from the user
     read amount
 
+    # Generate a unique invoice number using the current date and time
     invoice_number=$(date +%Y%m%d%H%M%S)
+    # Append the invoice details (invoice number, customer name, and amount) to the invoice file
     echo "Invoice Number: $invoice_number" >> "$invoice_file"
     echo "Customer Name: $customer_name" >> "$invoice_file"
     echo "Amount: $amount" >> "$invoice_file"
+    # Display a success message indicating that the invoice was generated successfully
     echo "Invoice generated successfully!"
 }
 
-# Function to view invoices
+
+# Function for viewing all invoices stored in the invoice file
 view_invoices() {
+    # Display a header indicating that the following content is a list of invoices
     echo "Invoices:"
+    # Output the contents of the invoice file using the cat command
     cat "$invoice_file"
 }
 
@@ -238,4 +265,5 @@ while true; do
         5) echo "Exiting..."; break ;;
         *) echo "Invalid choice. Please enter a valid option." ;;
     esac
-done
+done 
+
