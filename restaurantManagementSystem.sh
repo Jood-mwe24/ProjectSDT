@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Initializing files to store data in 
+# Initializing files to store data in
 menu_file="menu.txt"
 inventory_file="inventory.txt"
 database_file="recipes.txt"
 invoice_file="invoices.txt"
 
-
+# Creating files to store inputs from functions when calling and implimenting
 touch "$menu_file" "$inventory_file" "$database_file" "$invoice_file"
 
 # Function to display main menu
@@ -55,24 +55,24 @@ display_menu() {
 # Function for Menu Management
 menu_management() {
     while true; do
-        display_menu 1
-        read choice
+        display_menu 1 # Displaying menu management options from the sub menu function
+        read choice # reading input from the user to choose which service to run from the options
 
-        case $choice in
+        case $choice in # case statement to determine which choise to run  
             1) add_menu_item ;;
             2) view_menu ;;
             3) delete_menu_item ;;
             4) break ;;
             *) echo "Invalid choice. Please enter a valid option." ;;
-        esac
-    done
-}
+        esac # End of case statement 
+    done # End of while loop
+} # End of menu management function defining
 
 # Defining a function named ingredient inventory
 ingredient_inventory() {
 # Starting an infinite loop with coundition( True )
 # It is created to display the available choices the user can choose from
-# It also handles user inputs
+# It also handles user inputsc
     while true; do
 	#Calling display menu function with option 2 as argument
 	# Its job is to diplay options
@@ -95,7 +95,6 @@ ingredient_inventory() {
 }
 # End of function definition
 
-# Function for Recipe Database
 # Function for managing the Recipe Database
 recipe_database() {
     # Start an infinite loop to display the recipe database menu
