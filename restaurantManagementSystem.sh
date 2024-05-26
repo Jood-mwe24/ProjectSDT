@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Initialize files if not exists
+# Initializing files to store data in 
 menu_file="menu.txt"
 inventory_file="inventory.txt"
 database_file="recipes.txt"
 invoice_file="invoices.txt"
+
 
 touch "$menu_file" "$inventory_file" "$database_file" "$invoice_file"
 
@@ -19,32 +20,37 @@ display_main_menu() {
     echo "Enter your choice: "
 }
 
-# Function to display sub-menus
+# Defining Function to display sub-menus to choose from after the user choose which service he wants 
 display_menu() {
+    # Starting a case statement to view details and display menu after chosing the desired service
     case $1 in
+	# If the user choose number 1 then a list of services will be displayed under the (menu management) feature
         1) echo "Menu Management"
            echo "1. Add Menu Item"
            echo "2. View Menu"
            echo "3. Delete Menu Item"
            ;;
+	# If the User choose number 2 thena a list of services will be displayed under the (ingredient inventory tracker ) feature
         2) echo "Ingredient Inventory Tracker"
            echo "1. Add Ingredient"
            echo "2. View Inventory"
            echo "3. Update Ingredient Quantity"
            ;;
+	# If the user choose number 3 then a list of services will be displayed under the (Recipe Database) feature
         3) echo "Recipe Database"
            echo "1. Add Recipe"
            echo "2. View Recipes"
            echo "3. Search Recipes"
            ;;
+	# If the user choose number 4 then a list of services will be displayed under the (billing and invoicing system) feature
         4) echo "Billing and Invoicing System"
            echo "1. Generate Invoice"
            echo "2. View Invoices"
            ;;
-    esac
-    echo "4. Back"
-    echo "Enter your choice: "
-}
+    esac # End of case statement
+    echo "4. Back" # This line is shared between every feature and it is going to be printed at the end of each list 
+    echo "Enter your choice: " # Prompt message for the user to enter a chois
+} # End of function definition
 
 # Function for Menu Management
 menu_management() {
@@ -62,21 +68,32 @@ menu_management() {
     done
 }
 
-# Function for Ingredient Inventory Tracker
+# Defining a function named ingredient inventory
 ingredient_inventory() {
+# Starting an infinite loop with coundition( True )
+# It is created to display the available choices the user can choose from
+# It also handles user inputs
     while true; do
+	#Calling display menu function with option 2 as argument
+	# Its job is to diplay options
         display_menu 2
+	# Reading user input and assigning it to a variable named (choice)
         read choice
 
+	# Starting case statement to handle different choices
+	# In this case statement we have 3 function calls which are the services
+	# The forth option is the exit choise
+	# And for default case it is going to be ann error message for wrong entry
         case $choice in
             1) add_ingredient ;;
             2) view_inventory ;;
             3) update_quantity ;;
             4) break ;;
             *) echo "Invalid choice. Please enter a valid option." ;;
-        esac
-    done
+        esac # End of case statement
+    done # End of while loop
 }
+# End of function definition
 
 # Function for Recipe Database
 # Function for managing the Recipe Database
