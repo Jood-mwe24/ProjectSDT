@@ -138,32 +138,36 @@ billing_invoicing() {
 
 # Function to add menu item
 add_menu_item() {
+	# Here we are prompting the user to Enter the name of the item and its price using echo and read
     echo "Enter the name of the menu item: "
     read name
     echo "Enter the price of the menu item: "
     read price
-
+# This line appendes new item the menu file to store it so we can have back any time
     echo "$name - $price" >> "$menu_file"
     echo "Menu item added successfully!"
 }
 
 # Function to view menu
 view_menu() {
+# this function only views what the menu file has
     echo "Menu:"
     cat "$menu_file"
 }
 
 # Function to delete menu item
 delete_menu_item() {
+	# This line prompt the user to enter the item he wants to delete
     echo "Enter the name of the menu item to delete: "
     read name
-
+      # This line is using sed to delete lines with name value in it
     sed -i "/$name/d" "$menu_file"
     echo "Menu item deleted successfully!"
 }
 
 # Function to add ingredient
 add_ingredient() {
+# This function prompt the user to input the ingredient with its quantity to be saved in the file
     echo "Enter the name of the ingredient: "
     read name
     echo "Enter the quantity of $name: "
@@ -175,16 +179,19 @@ add_ingredient() {
 
 # Function to view inventory
 view_inventory() {
+# This function only display the content of inventory file
     echo "Inventory:"
     cat "$inventory_file"
 }
 
 # Function to update ingredient quantity
 update_quantity() {
+# This function asks the user to enter the name of the item he wants to update  and new quantity to be updated
     echo "Enter the name of the ingredient to update: "
     read name
     echo "Enter the new quantity of $name: "
     read new_quantity
+# and her sed is used to susbtitute the old quantity with the new quantity
 
     sed -i "s/^$name:.*/$name:$new_quantity/" "$inventory_file"
     echo "Ingredient quantity updated successfully!"
@@ -259,20 +266,17 @@ view_invoices() {
     cat "$invoice_file"
 }
 
-# Initial setup
-# Add any initial setup steps here if needed
-
-# Main script
-# Add an if statement for initial setup or validation if needed
+# Check if no command-line arguments are provided
 if [ $# -eq 0 ]; then
-    echo "Welcome to Restaurant Management System!"
-    # Perform any initial setup here if needed
+    echo "Welcome to Restaurant Management System!" # Welcom message for the user
+    
 fi
 
+# Starting an infinite loop to display the main menu and then ask the user to input the service of his choise
 while true; do
     display_main_menu
     read choice
-
+# Starting a case statment to handle user input and display the options 
     case $choice in
         1) menu_management ;;
         2) ingredient_inventory ;;
@@ -280,6 +284,6 @@ while true; do
         4) billing_invoicing ;;
         5) echo "Exiting..."; break ;;
         *) echo "Invalid choice. Please enter a valid option." ;;
-    esac
-done 
+    esac # End of case statement
+done # End of while loop
 
